@@ -28,8 +28,7 @@
 \setbeamertemplate{itemize item}[square]
 \setbeamertemplate{itemize subitem}[square]
 \setbeamertemplate{navigation symbols}{}%remove navigation symbols
-%show frame numbers
-\expandafter\def\expandafter\insertshorttitle\expandafter{\insertshorttitle\hfill\insertframenumber\,}
+\expandafter\def\expandafter\insertshorttitle\expandafter{\insertshorttitle\hfill\insertframenumber\,} %show frame numbers
 
 \usepackage[utf8]{inputenc}
 \usepackage[ngerman]{babel} %german language
@@ -40,13 +39,15 @@
 \lstset{ %configure code listings
 	basicstyle=\ttfamily,
 	keepspaces=true, 
-	numbers=left,
+	numbers=none,
 	commentstyle=\color{commentgreen},
 	keywordstyle=\color{blue},
 	escapeinside={\%*}{*)}
 }
 \usepackage{tikz} %diagrams
 \usepackage{verbatim} %diagrams
+\usepackage{wasysym} %emojis
+\usepackage{hyperref} %links
 
 \title[Entwicklung von Hybrid-Apps am Beispiel von Apache Cordova]{Entwicklung von Hybrid-Apps am Beispiel von Apache Cordova}
 %\subtitle{}
@@ -63,24 +64,82 @@
 
 \begin{frame}\frametitle{Allgemeine Daten}
 	\begin{columns}[t,onlytextwidth]
-		\column{.5\textwidth}
+		\column{.7\textwidth}
 		\begin{itemize}
-			\item Daten zu Apache Cordova
+			\item mobile application development framework
+			\item Anfängliche Entwicklung durch Nitobi
+			\item 2011 Übernahme durch Adobe
 			\begin{itemize}
-				\item Daten zu Apache Cordova
+				\item "`PhoneGap"'
+				\item "`Apache Cordova"'
 			\end{itemize}
+			\item Basis für ähnliche Projekte z.B. Ionic, Monaca, Intel XDK
+			\item Unterstützung durch: Adobe, BlackBerry, IBM, Intel, Microsoft, Mozilla
+			\item Ziel-OSs: iOS, Android, Blackberry etc.
 		\end{itemize}
-		\column{.5\textwidth}
+		\column{.3\textwidth}
 		\centering
-		\includegraphics[width=1.0\textwidth,valign=t]{pictures/placeholder}
+		
+		\includegraphics[width=0.6\textwidth]{pictures/cordova_logo}
+		
+		\begin{tikzpicture} 
+		\node [inner sep=0pt] at (0,0) {\includegraphics[width=2.0cm]{pictures/Pacifica}};
+		\draw [white, rounded corners=0.4cm, line width=0.35cm] 
+			(current bounding box.north west) -- 
+			(current bounding box.north east) --
+			(current bounding box.south east) --
+			(current bounding box.south west) -- cycle;
+		\end{tikzpicture}
+		\begin{tikzpicture}
+		\node [inner sep=0pt] at (0,0) {\includegraphics[width=2.0cm]{pictures/CleverBaby}};
+		\draw [white, rounded corners=0.4cm, line width=0.35cm] 
+			(current bounding box.north west) -- 
+			(current bounding box.north east) --
+			(current bounding box.south east) --
+			(current bounding box.south west) -- cycle;
+		\end{tikzpicture}
 	\end{columns}
 \end{frame}
 
-\section{Installation}
-\begin{frame}\frametitle{Installation}
-	\begin{itemize}
-		\item code und zeug
-	\end{itemize}
+\section{Installation \& Build}
+\begin{frame}[fragile]\frametitle{Installation - Cordova}
+Vorraussetzungen:
+\begin{itemize}
+	\item Node.js
+	\item (optional) Entwicklungsumgebungen für Plattformen
+\end{itemize}
+\begin{lstlisting}[language=Python]
+$ npm install -g cordova
+$ cordova create MyApp; cd MyApp
+$ cordova platform add <platform>
+$ cordova run <platform>
+#platform: browser, android, ios...
+
+$ cordova requirements
+\end{lstlisting}
+
+\end{frame}
+
+\begin{frame}\frametitle{Installation - Plattformen}
+	\begin{columns}[t,onlytextwidth]
+		\column{.6\textwidth}
+			Android:
+			\begin{itemize}
+				\item Java SDK (JAVA\_HOME setzen)
+				\item Android SDK (ANDROID\_HOME setzen)
+				\item gradle (z.B. über Android Studio)
+			\end{itemize}
+			installieren und der "`PATH"'-Umgebungsvariable hinzufügen\newline
+			
+			iOS:
+			\begin{itemize}
+				\item auf OSX: \href{https://cordova.apache.org/docs/en/latest/guide/platforms/ios/index.html}{\textcolor{cordovablue}{iOS Platform Guide}}
+				\item auf Windows, Linux: {\LARGE \frownie} ?
+			\end{itemize}
+		\column{.4\textwidth}
+		\centering
+		\includegraphics[width=0.9\textwidth,valign=t]{pictures/cordova_device_is_ready}
+	\end{columns}
 \end{frame}
 
 \section{"'Hello World"'-Beispiel}
@@ -96,6 +155,10 @@
 \begin{itemize}
 	\item https://cordova.apache.org/
 	\item https://ccoenraets.github.io/cordova-tutorial/index.html
+	\item https://www.thinkpacifica.com/
+	\item https://www.mycleverbaby.com/features.html
+	\item https://en.wikipedia.org/wiki/Apache\_Cordova
+	\item https://developer.ibm.com/dwblog/2017/what-is-apache-cordova-cross-platform-mobile-application-development/
 \end{itemize}
 \end{frame}
 
