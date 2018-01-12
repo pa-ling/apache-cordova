@@ -12,7 +12,7 @@
 	\end{beamercolorbox}
 	\begin{beamercolorbox}{section in head/foot}
 		\vskip2pt\insertnavigation{\paperwidth}\vskip2pt
-	\end{beamercolorbox}%
+	\end{beamercolorbox}
 	\begin{beamercolorbox}[colsep=1.5pt]{lower separation line head}
 	\end{beamercolorbox}
 }
@@ -74,7 +74,7 @@
 				\item "`Apache Cordova"'
 			\end{itemize}
 			\item Basis für ähnliche Projekte z.B. Ionic, Monaca, Intel XDK
-			\item Unterstützung durch: Adobe, BlackBerry, IBM, Intel, Microsoft, Mozilla
+			\item Unterstützung durch: Adobe, IBM, Intel, Microsoft
 			\item Ziel-OSs: iOS, Android, Blackberry etc.
 		\end{itemize}
 		\column{.3\textwidth}
@@ -134,7 +134,7 @@ $ cordova requirements
 			iOS:
 			\begin{itemize}
 				\item auf OSX: \href{https://cordova.apache.org/docs/en/latest/guide/platforms/ios/index.html}{\textcolor{cordovablue}{iOS Platform Guide}}
-				\item auf Windows, Linux: {\LARGE \frownie} ?
+				\item auf Windows, Linux: {\LARGE \frownie} oder Adobe PhoneGap Build
 			\end{itemize}
 		\column{.4\textwidth}
 		\centering
@@ -142,8 +142,67 @@ $ cordova requirements
 	\end{columns}
 \end{frame}
 
-\section{"'Hello World"'-Beispiel}
-\section{Grenzen von Hybrid-Apps}
+\section{Demo}
+\begin{frame}
+	\centering
+	{\LARGE \textcolor{cordovablue}{Demo}}\\
+	\vspace{4ex}
+	\href{https://github.com/pa-ling/apache-cordova}{https://github.com/pa-ling/apache-cordova}
+\end{frame}
+
+\renewcommand{\arraystretch}{1.5}
+\section{Nativ vs. Hybrid vs. Web}
+
+\begin{frame}
+	\begin{columns}[t,onlytextwidth]
+		\begin{tabular}{ l | c | c | c }
+			& {\large \textcolor{cordovablue}{Native App}} & {\large \textcolor{cordovablue}{Hybrid App}} & {\large \textcolor{cordovablue}{Web App}} \\
+			\hline
+			Programmiersprache: & nativ & nativ / web & web \\
+			Portabilität: & nein & ja & ja \\
+			Gerätezugriff: & Hoch & Mittel & Niedrig \\
+			Wissensverfügbarkeit: & Niedrig & Hoch & Hoch \\
+			Leistung: & Hoch & Mittel & Mittel \\
+			Updates: & Langsam & Mittel & Hoch \\
+		\end{tabular}
+	\end{columns}
+\end{frame}
+
+\begin{frame}
+	\begin{columns}[t,onlytextwidth]
+		\begin{tabular}{ p{3.2cm} | p{3.2cm} | p{3.2cm} }
+			{\large \textcolor{cordovablue}{Native App}} & {\large \textcolor{cordovablue}{Hybrid App}} & {\large \textcolor{cordovablue}{Web App}} \\
+			\hline
+			Natives Know-How & Web Know-How & Web Know-How \\
+			Nur eine Plattform & Kompromiss zwischen Native und Web & Schnelle Auslieferung \\
+			Viele/aktuelle native Funktionalitäten &  & Schnelle Updates \\
+			Hohe Performance &  &  \\
+		\end{tabular}
+	\end{columns}
+\end{frame}
+
+\begin{frame}\frametitle{Grenzen von Apache Cordova}
+	\begin{columns}[t,onlytextwidth]
+		\column{.5\textwidth}
+		\begin{itemize}
+			\item Akkuladestand
+			\item Kamera
+			\item Bewegung und Ausrichtung des Geräts
+			\item Dateiverwaltung
+			\item GPS
+			\item Inapp-Browser
+			\item Vibration
+			\item Push-Notifications
+			\item ...
+		\end{itemize}
+		\column{.5\textwidth}
+		\begin{itemize}
+			\item Augmented Reality
+			\item 
+		\end{itemize}
+	\end{columns}
+\end{frame}
+
 \section{Sensorik-Nutzung}
 
 \begin{frame}
@@ -159,6 +218,7 @@ $ cordova requirements
 	\item https://www.mycleverbaby.com/features.html
 	\item https://en.wikipedia.org/wiki/Apache\_Cordova
 	\item https://developer.ibm.com/dwblog/2017/what-is-apache-cordova-cross-platform-mobile-application-development/
+	\item ftp://public.dhe.ibm.com/software/pdf/mobile-enterprise/WSW14182USEN.pdf
 \end{itemize}
 \end{frame}
 
