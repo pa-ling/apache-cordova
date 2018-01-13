@@ -18,14 +18,13 @@
                 $('body').html(new EmployeeView(employee).render().$el);
             });
         });
-
         router.start();
     });
 
-    var slider = new PageSlider($('body'));
-
     /* --------------------------------- Event Registration -------------------------------- */
     document.addEventListener('deviceready', function () {
+        console.log("Device is ready!");
+        testBLE();
         if (navigator.notification) { // Override default HTML alert with native dialog
             window.alert = function (message) {
                 navigator.notification.alert(
@@ -39,5 +38,33 @@
     }, false);
 
     /* ---------------------------------- Local Functions ---------------------------------- */
+    function testBLE() {
+        var scanFail =  function() {
+            console.log("Scan failed!");
+        };
+
+        var connectFail = function() {
+            console.log("Connect failed!");
+        };
+
+        var notifyfail = function() {
+            console.log("Notify failed!");
+        }
+
+        ble.scan([], 10, function(device) {
+            console.log(JSON.stringify(device));
+
+            if ("BLEEnv" === device.name) {
+                ble.connect(device.id, function() {
+                    console.log("Connect success!");
+
+                    ble.startNotification(device.id, "0000ffe0-0000-1000-8000-00805f9b34fb", "0000ffe1-0000-1000-8000-00805f9b34fb", function(buffer) {
+                        var data = String.fromCharCode.apply(null, new Uint8Array(buffer));
+                        console.log("Received:" + data);
+                    }, notifyfail)
+                }, connectFail);
+            }
+        }, scanFail);
+    }
 
 }());

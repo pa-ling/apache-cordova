@@ -36,14 +36,38 @@
 %\usepackage{svg} %insert vector graphics
 \usepackage[export]{adjustbox} %for columns?
 \usepackage{listings} %insert code
+\lstdefinelanguage{JavaScript}{
+	keywords={typeof, new, true, false, catch, function, return, null, catch, switch, var, if, in, while, do, else, case, break},
+	keywordstyle=\color{blue}\bfseries,
+	ndkeywords={class, export, boolean, throw, implements, import, this},
+	ndkeywordstyle=\color{darkgray}\bfseries,
+	identifierstyle=\color{black},
+	sensitive=false,
+	comment=[l]{//},
+	morecomment=[s]{/*}{*/},
+	commentstyle=\color{purple}\ttfamily,
+	stringstyle=\color{green}\ttfamily,
+	morestring=[b]',
+	morestring=[b]"
+}
 \lstset{ %configure code listings
 	basicstyle=\ttfamily,
 	keepspaces=true, 
 	numbers=none,
 	commentstyle=\color{commentgreen},
 	keywordstyle=\color{blue},
-	escapeinside={\%*}{*)}
+	escapeinside={\%*}{*)},
+	tabsize=2,
+	literate=%
+	{Ö}{{\"O}}1
+	{Ä}{{\"A}}1
+	{Ü}{{\"U}}1
+	{ß}{{\ss}}1
+	{ü}{{\"u}}1
+	{ä}{{\"a}}1
+	{ö}{{\"o}}1
 }
+
 \usepackage{tikz} %diagrams
 \usepackage{verbatim} %diagrams
 \usepackage{wasysym} %emojis
@@ -73,7 +97,7 @@
 				\item "`PhoneGap"'
 				\item "`Apache Cordova"'
 			\end{itemize}
-			\item Basis für ähnliche Projekte z.B. Ionic, Monaca, Intel XDK
+			\item Basis für ähnliche Projekte z.B. Ionic, Monaca
 			\item Unterstützung durch: Adobe, IBM, Intel, Microsoft
 			\item Ziel-OSs: iOS, Android, Blackberry etc.
 		\end{itemize}
@@ -131,15 +155,15 @@ $ cordova requirements
 			\end{itemize}
 			installieren und der "`PATH"'-Umgebungsvariable hinzufügen\newline
 			
-			iOS:
-			\begin{itemize}
-				\item auf OSX: \href{https://cordova.apache.org/docs/en/latest/guide/platforms/ios/index.html}{\textcolor{cordovablue}{iOS Platform Guide}}
-				\item auf Windows, Linux: {\LARGE \frownie} oder Adobe PhoneGap Build
-			\end{itemize}
 		\column{.4\textwidth}
 		\centering
-		\includegraphics[width=0.9\textwidth,valign=t]{pictures/cordova_device_is_ready}
+		\includegraphics[width=0.9\textwidth,valign=t]{pictures/cordova_device_is_ready}\\
 	\end{columns}
+	iOS:
+	\begin{itemize}
+		\item auf OSX: \href{https://cordova.apache.org/docs/en/latest/guide/platforms/ios/index.html}{\textcolor{cordovablue}{iOS Platform Guide}}
+		\item auf Windows, Linux: {\LARGE \frownie} oder Adobe PhoneGap Build (Cloud)
+	\end{itemize}
 \end{frame}
 
 \section{Demo}
@@ -148,6 +172,59 @@ $ cordova requirements
 	{\LARGE \textcolor{cordovablue}{Demo}}\\
 	\vspace{4ex}
 	\href{https://github.com/pa-ling/apache-cordova}{https://github.com/pa-ling/apache-cordova}
+	%index.html, cordova.js import und deviceready listener, ratchet zeigen
+	%Verzeichnisstruktur erklären?
+	%Workshop-App in Android zeigen (TODO: Bildschirm des Geräts zeigen)
+	%%Directory, GPS, 
+	%Workshop-App im Browser zeigen
+\end{frame}
+
+\section{Plugins}
+\begin{frame}[fragile]\frametitle{Plugins}
+	\begin{columns}[t,onlytextwidth]
+		\column{.5\textwidth}
+		\begin{lstlisting}[language=Python]
+# Hinzufügen
+$ cordova plugin add
+# Liste
+$ cordova plugin ls
+		\end{lstlisting}
+		$\rightarrow$ Überschreiben Standardfunktionalitäten 
+		\\z.B. alert()\\
+		$\rightarrow$ Erreichbar über globale Objekte
+		\\z.B. device, navigator
+		\column{.5\textwidth}
+		\begin{itemize}
+			\item Kamera
+			\item GPS
+			\item Vibration
+			\item Dialoge
+			\item Akkuladestand
+			\item Bewegung und Ausrichtung des Geräts
+			\item Dateiverwaltung
+			\item Push-Notifications
+			\item ...
+		\end{itemize}
+	\end{columns}
+\end{frame}
+
+\begin{frame}[fragile]\frametitle{Bluetooth}
+	\begin{lstlisting}[language=JavaScript]
+ble.scan([], 10, function(device) {
+	if ("BLEEnv" === device.name) {
+		ble.connect(device.id, function() {
+		ble.startNotification(
+			device.id,
+			SERVICE_UUID,
+			CHARACTERISTIC_UUID, 
+			function(arrayBuffer) {
+				var data = toString(arrayBuffer);
+				console.log("Received:" + data);
+			})
+		});
+	}
+});
+	\end{lstlisting}
 \end{frame}
 
 \renewcommand{\arraystretch}{1.5}
@@ -160,10 +237,10 @@ $ cordova requirements
 			\hline
 			Programmiersprache: & nativ & nativ / web & web \\
 			Portabilität: & nein & ja & ja \\
-			Gerätezugriff: & Hoch & Mittel & Niedrig \\
+			Gerätezugriff (APIs): & Hoch & Hoch/Mittel & Niedrig \\
 			Wissensverfügbarkeit: & Niedrig & Hoch & Hoch \\
 			Leistung: & Hoch & Mittel & Mittel \\
-			Updates: & Langsam & Mittel & Hoch \\
+			Updates: & Langsam & Mittel & Schnell \\
 		\end{tabular}
 	\end{columns}
 \end{frame}
@@ -174,36 +251,12 @@ $ cordova requirements
 			{\large \textcolor{cordovablue}{Native App}} & {\large \textcolor{cordovablue}{Hybrid App}} & {\large \textcolor{cordovablue}{Web App}} \\
 			\hline
 			Natives Know-How & Web Know-How & Web Know-How \\
-			Nur eine Plattform & Kompromiss zwischen Native und Web & Schnelle Auslieferung \\
+			Nur eine Plattform & Kompromiss zwischen Nativ und Web & Schnelle Auslieferung \\
 			Viele/aktuelle native Funktionalitäten &  & Schnelle Updates \\
 			Hohe Performance &  &  \\
 		\end{tabular}
 	\end{columns}
 \end{frame}
-
-\begin{frame}\frametitle{Grenzen von Apache Cordova}
-	\begin{columns}[t,onlytextwidth]
-		\column{.5\textwidth}
-		\begin{itemize}
-			\item Akkuladestand
-			\item Kamera
-			\item Bewegung und Ausrichtung des Geräts
-			\item Dateiverwaltung
-			\item GPS
-			\item Inapp-Browser
-			\item Vibration
-			\item Push-Notifications
-			\item ...
-		\end{itemize}
-		\column{.5\textwidth}
-		\begin{itemize}
-			\item Augmented Reality
-			\item 
-		\end{itemize}
-	\end{columns}
-\end{frame}
-
-\section{Sensorik-Nutzung}
 
 \begin{frame}
 	\centering
@@ -219,6 +272,7 @@ $ cordova requirements
 	\item https://en.wikipedia.org/wiki/Apache\_Cordova
 	\item https://developer.ibm.com/dwblog/2017/what-is-apache-cordova-cross-platform-mobile-application-development/
 	\item ftp://public.dhe.ibm.com/software/pdf/mobile-enterprise/WSW14182USEN.pdf
+	\item https://www.npmjs.com/package/cordova-plugin-ble-central
 \end{itemize}
 \end{frame}
 

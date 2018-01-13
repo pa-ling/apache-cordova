@@ -12,21 +12,22 @@
     "dependencies": {
         "cordova-android": "^7.0.0",
         "cordova-browser": "^5.0.3",
+        "cordova-plugin-ble-central": "^1.1.4",
         "cordova-plugin-camera": "^4.0.1",
+        "cordova-plugin-compat": "^1.2.0",
         "cordova-plugin-device": "^2.0.1",
         "cordova-plugin-dialogs": "^2.0.1",
         "cordova-plugin-geolocation": "^4.0.1",
-        "cordova-plugin-vibration": "^3.0.1",
-        "cordova-plugin-whitelist": "^1.3.3"
+        "cordova-plugin-vibration": "^3.0.1"
     },
     "cordova": {
         "plugins": {
-            "cordova-plugin-whitelist": {},
             "cordova-plugin-device": {},
             "cordova-plugin-dialogs": {},
             "cordova-plugin-geolocation": {},
             "cordova-plugin-camera": {},
-            "cordova-plugin-vibration": {}
+            "cordova-plugin-vibration": {},
+            "cordova-plugin-ble-central": {}
         },
         "platforms": [
             "android",
