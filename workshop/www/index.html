@@ -1,12 +1,15 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
     <script src="cordova.js"></script>
-    <link href="assets/ratchet/css/ratchet.css" rel="stylesheet"> <!--Styles for mobile applications-->
+    <link href="assets/ratchet/css/ratchet.css" rel="stylesheet">
+    <!--Styles for mobile applications-->
     <link href="assets/css/styles.css" rel="stylesheet">
 </head>
+
 <body>
     <!--HTML Template for the Home View-->
     <script id="home-tpl" type="text/template">
@@ -14,7 +17,7 @@
             <h1 class="title">Directory</h1>
         </header>
         <div class="bar bar-standard bar-header-secondary">
-            <input class='search-key' type="search"/>
+            <input class='search-key' type="search" />
         </div>
         <div class="content"></div>
     </script>
@@ -24,13 +27,13 @@
         <ul class="table-view">
             {{#each this}}
             <li class="table-view-cell media">
-              <a href="#employees/{{ id }}">
-                  <img class="media-object pull-left" src="assets/pics/{{pic}}">
-                  <div class="media-body">
-                      {{firstName}} {{lastName}}
-                      <p>{{title}}</p>
-                  </div>
-              </a>
+                <a href="#employees/{{ id }}">
+                    <img class="media-object pull-left" src="assets/pics/{{pic}}">
+                    <div class="media-body">
+                        {{firstName}} {{lastName}}
+                        <p>{{title}}</p>
+                    </div>
+                </a>
             </li>
             {{/each}}
         </ul>
@@ -91,20 +94,28 @@
                         </a>
                     </li>
                     <li class="table-view-cell media">
-                            <a hre="#" class="push-right add-location-btn">
-                                <span class="media-object pull-left"></span>
-                                <div class="media-body">
-                                    Add location
-                                </div>
-                            </a>
+                        <a hre="#" class="push-right add-location-btn">
+                            <span class="media-object pull-left"></span>
+                            <div class="media-body">
+                                Add location
+                            </div>
+                        </a>
                     </li>
                     <li class="table-view-cell media">
-                            <a hre="#" class="push-right change-pic-btn">
-                                <span class="media-object pull-left"></span>
-                                <div class="media-body">
-                                    Change Picture
-                                </div>
-                            </a>
+                        <a hre="#" class="push-right change-pic-btn">
+                            <span class="media-object pull-left"></span>
+                            <div class="media-body">
+                                Change Picture
+                            </div>
+                        </a>
+                    </li>
+                    <li class="table-view-cell media">
+                        <a hre="#" class="push-right bluetooth-test-btn">
+                            <span class="media-object pull-left"></span>
+                            <div class="media-body">
+                                Bluetooth Test
+                            </div>
+                        </a>
                     </li>
                 </ul>
             </div>
@@ -120,4 +131,5 @@
     <script src="js/EmployeeView.js"></script>
     <script src="js/app.js"></script>
 </body>
+
 </html>
