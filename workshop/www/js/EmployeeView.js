@@ -83,10 +83,13 @@ var EmployeeView = function (employee) {
                 ble.connect(device.id, function () {
                     console.log("Connect success!");
 
-                    ble.startNotification(device.id, "0000ffe0-0000-1000-8000-00805f9b34fb", "0000ffe1-0000-1000-8000-00805f9b34fb", function (buffer) {
-                        var data = String.fromCharCode.apply(null, new Uint8Array(buffer));
-                        console.log("Received:" + data);
-                    }, notifyfail)
+                    ble.startNotification(device.id,
+                        "0000ffe0-0000-1000-8000-00805f9b34fb",
+                        "0000ffe1-0000-1000-8000-00805f9b34fb",
+                        function (buffer) {
+                            var data = String.fromCharCode.apply(null, new Uint8Array(buffer));
+                            console.log("Received:" + data);
+                        }, notifyfail);
                 }, connectFail);
             }
         }, scanFail);

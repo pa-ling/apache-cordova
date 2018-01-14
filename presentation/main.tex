@@ -53,7 +53,7 @@
 \lstset{ %configure code listings
 	basicstyle=\ttfamily,
 	keepspaces=true, 
-	numbers=none,
+	numbers=none,  %{none, left, right}
 	commentstyle=\color{commentgreen},
 	keywordstyle=\color{blue},
 	escapeinside={\%*}{*)},
@@ -104,7 +104,7 @@
 		\column{.3\textwidth}
 		\centering
 		
-		\includegraphics[width=0.6\textwidth]{pictures/cordova_logo}
+		\includegraphics[width=0.4\textwidth]{pictures/cordova_logo}
 		
 		\begin{tikzpicture} 
 		\node [inner sep=0pt] at (0,0) {\includegraphics[width=2.0cm]{pictures/Pacifica}};
@@ -113,6 +113,7 @@
 			(current bounding box.north east) --
 			(current bounding box.south east) --
 			(current bounding box.south west) -- cycle;
+		\node[draw] at (2,0) {Pacifica};
 		\end{tikzpicture}
 		\begin{tikzpicture}
 		\node [inner sep=0pt] at (0,0) {\includegraphics[width=2.0cm]{pictures/CleverBaby}};
@@ -121,6 +122,7 @@
 			(current bounding box.north east) --
 			(current bounding box.south east) --
 			(current bounding box.south west) -- cycle;
+		\node[draw] at (-2,0) {Clever Baby};
 		\end{tikzpicture}
 	\end{columns}
 \end{frame}
@@ -162,7 +164,7 @@ $ cordova requirements
 	iOS:
 	\begin{itemize}
 		\item auf OSX: \href{https://cordova.apache.org/docs/en/latest/guide/platforms/ios/index.html}{\textcolor{cordovablue}{iOS Platform Guide}}
-		\item auf Windows, Linux: {\LARGE \frownie} oder Adobe PhoneGap Build (Cloud)
+		\item auf Windows, Linux: {\LARGE \frownie} oder Adobe PhoneGap Build
 	\end{itemize}
 \end{frame}
 
@@ -172,11 +174,6 @@ $ cordova requirements
 	{\LARGE \textcolor{cordovablue}{Demo}}\\
 	\vspace{4ex}
 	\href{https://github.com/pa-ling/apache-cordova}{https://github.com/pa-ling/apache-cordova}
-	%index.html, cordova.js import und deviceready listener, ratchet zeigen
-	%Verzeichnisstruktur erklären?
-	%Workshop-App in Android zeigen (TODO: Bildschirm des Geräts zeigen)
-	%%Directory, GPS, 
-	%Workshop-App im Browser zeigen
 \end{frame}
 
 \section{Plugins}
@@ -185,11 +182,12 @@ $ cordova requirements
 		\column{.5\textwidth}
 		\begin{lstlisting}[language=Python]
 # Hinzufügen
-$ cordova plugin add
+$ cordova plugin add \
+		<plugin>
 # Liste
 $ cordova plugin ls
 		\end{lstlisting}
-		$\rightarrow$ Überschreiben Standardfunktionalitäten 
+		$\rightarrow$ Überschreiben von Standardfunktionalitäten 
 		\\z.B. alert()\\
 		$\rightarrow$ Erreichbar über globale Objekte
 		\\z.B. device, navigator
@@ -208,23 +206,24 @@ $ cordova plugin ls
 	\end{columns}
 \end{frame}
 
+\lstset{numbers=left}
 \begin{frame}[fragile]\frametitle{Bluetooth}
 	\begin{lstlisting}[language=JavaScript]
 ble.scan([], 10, function(device) {
 	if ("BLEEnv" === device.name) {
 		ble.connect(device.id, function() {
-		ble.startNotification(
-			device.id,
-			SERVICE_UUID,
-			CHARACTERISTIC_UUID, 
-			function(arrayBuffer) {
-				var data = toString(arrayBuffer);
-				console.log("Received:" + data);
-			})
+			ble.startNotification(
+				device.id,
+				SERVICE_UUID,
+				CHARACTERISTIC_UUID, 
+				function(arrayBuffer) {
+					var data = toString(arrayBuffer);
+					console.log("Received:" + data);
+				});
 		});
 	}
 });
-	\end{lstlisting}
+\end{lstlisting}
 \end{frame}
 
 \renewcommand{\arraystretch}{1.5}
@@ -253,7 +252,7 @@ ble.scan([], 10, function(device) {
 			Natives Know-How & Web Know-How & Web Know-How \\
 			Nur eine Plattform & Kompromiss zwischen Nativ und Web & Schnelle Auslieferung \\
 			Viele/aktuelle native Funktionalitäten &  & Schnelle Updates \\
-			Hohe Performance &  &  \\
+			Hohe Performance &  & mehrere Plattformen \\
 		\end{tabular}
 	\end{columns}
 \end{frame}
